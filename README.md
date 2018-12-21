@@ -15,7 +15,9 @@ How to use:
 ```bash
 $ yarn add react-native-webview-readability
 ```
-## Example usage
+## Example
+
+![Alt Text](https://i.imgur.com/WeROrao.gif)
 
 ```typescript
 
