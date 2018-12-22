@@ -26,12 +26,11 @@ exports.cleanHtml = function(html, sourceUrl) {
 
     try {
       const readability = new Readability(readabilityUrl, document);
-      console.log(readability)
       if(readability) {
         cleanedHtml = readability.parse();
       }
     } catch (error) {
-      // throw new Error('Unable to clean HTML');
+      throw new Error('Unable to clean HTML');
     }
 
     resolve(cleanedHtml);
