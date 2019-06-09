@@ -43,8 +43,16 @@ export default class ReadabilityWebView extends Component {
   };
 
   state = {
-    cleanHtmlSource: undefined
+    cleanHtmlSource: undefined,
+    readabilityArticle: null,
   };
+
+  refreshCSS = () => {
+    this.state.readabilityArticle &&
+      this.setState((state, props) => ({
+        cleanHtmlSource: cleanHtmlTemplate(this.props.css, props.title || state.readabilityArticle.title, state.readabilityArticle.content)
+      }));
+  }
 
   async componentDidMount(){
     const { url, htmlCss, title, readerMode } = this.props;
@@ -69,7 +77,8 @@ export default class ReadabilityWebView extends Component {
       }
 
       this.setState({
-        cleanHtmlSource: cleanHtml
+        cleanHtmlSource: cleanHtml,
+        readabilityArticle
       });
 
     } catch (err) {
@@ -77,6 +86,12 @@ export default class ReadabilityWebView extends Component {
         this.props.onError(err);
       }
     }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.css !== prevProps.css) {
+      this.refreshCSS();
+    }
+    
   }
 
   render() {
