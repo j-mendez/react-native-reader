@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
-  View,
-  WebView
+  View
 } from 'react-native';
+import { WebView } from 'react-native-webview';
 import Readability from './util/readability';
 import cleanHtmlTemplate from './util/cleanHtmlTemplate';
 import cleanHtmlCss from './util/cleanHtmlCss';
