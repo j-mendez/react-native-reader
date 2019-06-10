@@ -10,9 +10,9 @@ How to use:
 
 - Just pass in a Url into the component and your good to go.
 
-## Installation instructions
+## Installation Instructions
 
-Follow the instructions installing react-native-webview if not already installed [Installation Instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) or simply.
+Follow the instructions installing react-native-webview if not already installed [Getting Started](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) or simply.
 
 ```bash
 npm install react-native-webview
