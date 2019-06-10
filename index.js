@@ -75,7 +75,7 @@ export default class ReadabilityWebView extends Component {
       } else {
         cleanHtml = cleanHtmlTemplate(cleanHtmlCss, title || readabilityArticle.title, readabilityArticle.content);
       }
-
+      this.props.returnHtmlText(`${title || readabilityArticle.title}. ${readabilityArticle.content}`);
       this.setState({
         cleanHtmlSource: cleanHtml,
         readabilityArticle
@@ -87,6 +87,7 @@ export default class ReadabilityWebView extends Component {
       }
     }
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.css !== prevProps.css) {
       this.refreshCSS();
