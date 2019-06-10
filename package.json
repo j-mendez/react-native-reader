@@ -1,6 +1,6 @@
 {
   "name": "react-native-webview-readability",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "description": "React Native package that turns a Webview into a Safari like Readability View for android and iOS",
   "keywords": [
     "react-native",
