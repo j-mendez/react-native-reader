@@ -82,18 +82,34 @@ export default class ReadabilityWebView extends PureComponent {
   };
 
   render() {
+    const {
+      containerStyle,
+      loadingContainerStyle,
+      indicatorProps
+    } = this.props;
+
     return (
-      <View style={styles.flex}>
+      <View style={[styles.flex, containerStyle]}>
         {this.state.cleanHtmlSource === undefined ? (
           this.props.renderLoader ? (
             this.props.renderLoader
           ) : (
-            <View style={[styles.flex, styles.loadingContainer]}>
-              <ActivityIndicator />
+            <View
+              style={[
+                styles.flex,
+                styles.loadingContainer,
+                loadingContainerStyle
+              ]}
+            >
+              <ActivityIndicator {...indicatorProps} />
             </View>
           )
         ) : this.state.cleanHtmlSource === false ? (
-          <WebView style={styles.flex} source={{ uri: this.props.url }} />
+          <WebView
+            style={styles.flex}
+            source={{ uri: this.props.url }}
+            {...this.props}
+          />
         ) : (
           <WebView
             style={styles.flex}
@@ -101,6 +117,7 @@ export default class ReadabilityWebView extends PureComponent {
               html: this.state.cleanHtmlSource,
               baseUrl: this.props.url
             }}
+            {...this.props}
           />
         )}
       </View>

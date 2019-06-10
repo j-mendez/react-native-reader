@@ -12,15 +12,14 @@ How to use:
 
 ## Installation Instructions
 
-Follow the instructions installing react-native-webview if not already installed [Getting Started](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) or simply.
-
 ```bash
-npm install react-native-webview
-react-native link react-native-webview
+$ npm install react-native-webview-readability
 ```
 
+Follow [Getting Started](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) if react-native-webview is not installed or simply.
+
 ```bash
-npm install react-native-webview-readability
+$ react-native link react-native-webview
 ```
 
 ## Example
@@ -28,8 +27,7 @@ npm install react-native-webview-readability
 ![Alt Text](https://i.imgur.com/WeROrao.gif)
 
 ```typescript
-
-import ReadabilityWebView from 'react-native-webview-readability';
+import ReadabilityWebView from "react-native-webview-readability";
 
 const css = `
   body {
@@ -56,16 +54,22 @@ const css = `
 <ReadabilityWebView
   htmlCss={css}
   url="https://www.nytimes.com/"
-  title="The Earth is Flat" />
+  title="The Earth is Flat"
+/>;
 ```
 
 ## Available Props
 
-| prop              | default                  | type          | description                                                                                             |
-| ----------------- | ------------------------ | ------------- | ------------------------------------------------------------------------------------------------------- |
-| url               | ''                       | string        | Required: A valid web url source                                                                        |
-| htmlCss           | ''                       | string        | Optional: Css StyleSheet in a string format. Follow the default template for a start                    |
-| readerMode        | true                     | boolean       | Optional: Render the view with a Safari reader Mode Feel                                                |
-| renderLoader      | null                     | Component     | Optional: A custom component to render while your content is being loaded                               |
-| title             | ''                       | string        | Optional: A title to enforce for the content.This helps when a website has multiple h1 tags(dirty html) |
-| onError           | null                     | function      | Optional: A function that fires the error if a url is not valid                                         |
+| prop                 | default   | type      | description                                                                                                     |
+| -------------------- | --------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| url                  | ""        | string    | Required: A valid web url source                                                                                |
+| htmlCss              | ""        | string    | Optional: Css StyleSheet in a string format. Follow the default template for a start                            |
+| readerMode           | true      | boolean   | Optional: Render the view with a Safari reader Mode Feel                                                        |
+| renderLoader         | null      | Component | Optional: A custom component to render while your content is being loaded                                       |
+| title                | ""        | string    | Optional: A title to enforce for the content. Helps when a website has multiple h1 tags or (dirty html)         |
+| containerStyle       | undefined | object    | Optional: Controls the styling of the outer wrapper of the webview. (Useful for animations)                     |
+| loaderContainerStyle | undefined | object    | Optional: Controls the styling of the container for the spinner that appears when content is loading            |
+| indicatorProps       | undefined | object    | Optional: Exposes all [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator) props |
+| onError              | null      | function  | Optional: A function that fires the error if a url is not valid                                                 |
+
+This package also exposes every prop for react-native-webview. For the list of all available props check out [Other Props](https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md#style)
