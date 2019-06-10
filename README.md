@@ -1,20 +1,28 @@
 ## react-native-webview-readability
 
-This package uses Readability to provide a clean experience for display content from a external URL source
+This package uses Readability to provide a nice experience for displaying content from any website or url
 
 Main Feature:
 
-- This provides a Safari readerMode like feel that display's external content cleanly (For Reading)
+- This provides a Safari readerMode like feel that display's content cleanly (For Reading)
 
 How to use:
 
-- Just pass in a external Url into the component and your good to go.
+- Just pass in a Url into the component and your good to go.
 
 ## Installation instructions
 
+Follow the instructions installing react-native-webview if not already installed [Installation Instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) or simply.
+
 ```bash
-$ yarn add react-native-webview-readability
+npm install react-native-webview
+react-native link react-native-webview
 ```
+
+```bash
+npm install react-native-webview-readability
+```
+
 ## Example
 
 ![Alt Text](https://i.imgur.com/WeROrao.gif)
