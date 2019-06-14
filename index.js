@@ -1,6 +1,13 @@
 import React, { PureComponent } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { WebView } from "react-native-webview";
+import {
+  ActivityIndicator,
+  ScrollView,
+  Dimensions,
+  StyleSheet,
+  View
+} from "react-native";
+import HTML from "react-native-render-html";
+
 import {
   cleanHtml,
   cleanHtmlCss,
@@ -33,7 +40,6 @@ export default class ReadabilityWebView extends PureComponent {
     try {
       const response = await fetch(url);
       const html = await response.text();
-
       const readabilityArticle = await cleanHtml(html, url);
 
       this.setState({
@@ -91,6 +97,10 @@ export default class ReadabilityWebView extends PureComponent {
     } = this.props;
     const { cleanHtmlSource } = this.state;
 
+    const htmlProps = !cleanHtmlSource
+      ? { uri: url }
+      : { html: cleanHtmlSource };
+
     return (
       <View style={[styles.flex, containerStyle]}>
         {cleanHtmlSource === undefined ? (
@@ -108,20 +118,13 @@ export default class ReadabilityWebView extends PureComponent {
             </View>
           )
         ) : (
-          <WebView
-            style={styles.flex}
-            source={
-              !cleanHtmlSource
-                ? {
-                    uri: url
-                  }
-                : {
-                    html: cleanHtmlSource,
-                    baseUrl: url
-                  }
-            }
-            {...this.props}
-          />
+          <ScrollView style={[styles.flex, styles.container]}>
+            <HTML
+              {...this.props}
+              {...htmlProps}
+              imagesMaxWidth={Dimensions.get("window").width}
+            />
+          </ScrollView>
         )}
       </View>
     );
@@ -129,6 +132,10 @@ export default class ReadabilityWebView extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 4,
+    paddingHorizontal: 8
+  },
   flex: {
     flex: 1
   },

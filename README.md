@@ -1,4 +1,4 @@
-## react-native-webview-readability
+## react-native-readability
 
 This package uses Readability to provide a nice experience for displaying content from any website or url
 
@@ -13,13 +13,13 @@ How to use:
 ## Installation Instructions
 
 ```bash
-$ npm install react-native-webview-readability
+$ npm install react-native-readability
 ```
 
-Follow [Getting Started](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) if react-native-webview is not installed or simply.
+or
 
 ```bash
-$ react-native link react-native-webview
+$ yarn add react-native-readability
 ```
 
 ## Example
@@ -27,35 +27,31 @@ $ react-native link react-native-webview
 ![Alt Text](https://i.imgur.com/WeROrao.gif)
 
 ```typescript
-import ReadabilityWebView from "react-native-webview-readability";
+import ReadabilityView from "react-native-readability";
 
-const css = `
-  body {
-    color: #2a2a2a;
-    font-family: sans-serif, Roboto, monospace;
-  }
-  img, figure {
-    display: none;
-  }
-  h1 {
-    border-bottom-width: 1px;
-    border-color: #ccc;
-    padding-bottom: 3px;
-    border-bottom-style:solid;
-    font-size: 1.6em;
-    font-weight: bold;
-    letter-spacing: .05em;
-  }
-  p {
-    letter-spacing: .03em;
-  }
-`;
+<ReadabilityView url="https://www.nytimes.com/" title="The Earth is Flat" />;
+```
 
-<ReadabilityWebView
-  htmlCss={css}
-  url="https://www.nytimes.com/"
-  title="The Earth is Flat"
-/>;
+## Styling
+
+In addition to your custom renderers, you can apply specific styles to HTML tags (`tagsStyles`) or HTML classes (`classesStyles`). You can also combine these styles with your custom renderers.
+
+Styling options override themselves, so you might render a custom HTML tag with a [custom renderer](#creating-custom-renderers) like `<bluecircle>`, make it green with a class `<bluecircle class="make-me-green">` or make it red by styling the tag itself.
+
+The default style of your custom renderer will be merged to the one from your `classesStyles` which will also be merged by the `style` attribute.
+
+> **IMPORTANT NOTE : Do NOT use the `StyleSheet` API to create the styles you're going to feed to `tagsStyle` and `classesStyles`. Although it might look like it's working at first, the caching logic of `react-native` makes it impossible for this module to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.**
+
+Here's a usage example
+
+```javascript
+// props
+    tagsStyles: { i: { textAlign: 'center', fontStyle: 'italic', color: 'grey' } },
+    classesStyles: { 'last-paragraph': { textAlign: 'right', color: 'teal', fontWeight: '800' } }
+
+const html = `
+    <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
+    <p class="last-paragraph">Finally, this paragraph is styled through the classesStyles prop</p>`;
 ```
 
 ## Available Props
@@ -63,7 +59,6 @@ const css = `
 | prop                 | default   | type      | description                                                                                                     |
 | -------------------- | --------- | --------- | --------------------------------------------------------------------------------------------------------------- |
 | url                  | ""        | string    | Required: A valid web url source                                                                                |
-| htmlCss              | ""        | string    | Optional: Css StyleSheet in a string format. Follow the default template for a start                            |
 | readerMode           | true      | boolean   | Optional: Render the view with a Safari reader Mode Feel                                                        |
 | renderLoader         | null      | Component | Optional: A custom component to render while your content is being loaded                                       |
 | title                | ""        | string    | Optional: A title to enforce for the content. Helps when a website has multiple h1 tags or (dirty html)         |
@@ -72,4 +67,4 @@ const css = `
 | indicatorProps       | undefined | object    | Optional: Exposes all [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator) props |
 | onError              | null      | function  | Optional: A function that fires the error if a url is not valid                                                 |
 
-This package also exposes every prop for react-native-webview. For the list of all available props check out [Other Props](https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md#style)
+This package also exposes every prop for react-native-render-html. For the list of all available props check out [Other Props](https://github.com/archriss/react-native-render-html)
