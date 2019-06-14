@@ -73,3 +73,7 @@ const css = `
 | onError              | null      | function  | Optional: A function that fires the error if a url is not valid                                                 |
 
 This package also exposes every prop for react-native-webview. For the list of all available props check out [Other Props](https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md#style)
+
+## Experimental Branch (Webview Removal)
+
+Checkout the experimental/react-native-reader branch for webview dependancy removal and true native solution to parse any website into a reading view. You can install the dependancy with npm install react-native-reader and just drop in the new package to try it out.
