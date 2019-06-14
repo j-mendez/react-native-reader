@@ -36,6 +36,9 @@ export default class ReadabilityWebView extends PureComponent {
 
       const readabilityArticle = await cleanHtml(html, url);
 
+      // return article obj so title and content are available
+      this.props.exportArticle(readabilityArticle);
+
       this.setState({
         cleanHtmlSource: !readabilityArticle
           ? false
@@ -104,16 +107,17 @@ export default class ReadabilityWebView extends PureComponent {
               <ActivityIndicator {...indicatorProps} />
             </View>
           )
-        ) : this.state.cleanHtmlSource === false ? (
-          <WebView
-            style={styles.flex}
-            source={{ uri: this.props.url }}
-            {...this.props}
-          />
         ) : (
           <WebView
             style={styles.flex}
-            source={{
+            // useWebKit should be false to use custom fonts
+            useWebKit={this.props.useWebKit ? 
+              this.props.useWebKit : true
+            }
+            source={this.state.cleanHtmlSource === false ? 
+            { 
+              uri: this.props.url 
+            } : {
               html: this.state.cleanHtmlSource,
               baseUrl: this.props.url
             }}
