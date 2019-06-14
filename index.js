@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { WebView } from "react-native-webview";
 import {
@@ -8,7 +8,7 @@ import {
   defaultHtmlCss
 } from "./util";
 
-export default class ReadabilityWebView extends PureComponent {
+export default class ReadabilityWebView extends Component {
   static defaultProps = {
     url: "",
     htmlCss: defaultHtmlCss,
@@ -114,7 +114,7 @@ export default class ReadabilityWebView extends PureComponent {
             useWebKit={this.props.useWebKit ? 
               this.props.useWebKit : true
             }
-            source={this.state.cleanHtmlSource === false ? 
+            source={!this.state.cleanHtmlSource ? 
             { 
               uri: this.props.url 
             } : {
