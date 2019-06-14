@@ -69,7 +69,7 @@ export default class ReadabilityWebView extends PureComponent {
       this.setState({
         cleanHtmlSource: cleanHtmlTemplate(
           this.props.htmlCss,
-          props.title || this.state.readabilityArticle.title,
+          this.props.title || this.state.readabilityArticle.title,
           this.state.readabilityArticle.content
         )
       });
