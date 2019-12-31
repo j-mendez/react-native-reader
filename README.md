@@ -16,12 +16,6 @@ How to use:
 $ npm install react-native-reader
 ```
 
-or
-
-```bash
-$ yarn add react-native-reader
-```
-
 ## Example
 
 ![Alt Text](https://i.imgur.com/WeROrao.gif)
@@ -47,4 +41,4 @@ import ReaderView from "react-native-reader";
 | indicatorProps       | undefined | object    | Optional: Exposes all [ActivityIndicator](https://facebook.github.io/react-native/docs/activityindicator) props |
 | onError              | null      | function  | Optional: A function that fires the error if a url is not valid                                                 |
 
-This package also exposes every prop for react-native-htmlview. For the list of all available props check out [Other Props](https://github.com/archriss/react-native-htmlview)
+This package also exposes every prop for react-native-htmlview. For the list of all available props check out [Other Props](https://github.com/jsdf/react-native-htmlview)
