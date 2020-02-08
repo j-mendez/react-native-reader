@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import {
   ActivityIndicator,
   ScrollView,
-  Dimensions,
   StyleSheet,
   View,
   Text
@@ -10,18 +9,16 @@ import {
 import HTMLView from "react-native-htmlview";
 import { cleanHtml } from "clean-html-js";
 
-export default class ReadabilityWebView extends PureComponent {
-  static defaultProps = {
-    url: "",
-    title: "",
-    onError: null,
-    renderLoader: null
-  };
+class ReadabilityView extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  state = {
-    cleanHtmlSource: undefined,
-    readabilityArticle: null
-  };
+    this.state = {
+      cleanHtmlSource: undefined
+    };
+
+    this.parseHtml = this.parseHtml.bind(this);
+  }
 
   componentDidMount() {
     this.parseHtml();
@@ -36,7 +33,7 @@ export default class ReadabilityWebView extends PureComponent {
     }
   }
 
-  parseHtml = async () => {
+  async parseHtml() {
     const { url, title, onError } = this.props;
 
     try {
@@ -47,15 +44,14 @@ export default class ReadabilityWebView extends PureComponent {
       this.setState({
         cleanHtmlSource: !readabilityArticle
           ? `<h1>Sorry, issue parsing ${url}</h1>`
-          : readabilityArticle.content,
-        readabilityArticle
+          : readabilityArticle.content
       });
     } catch (err) {
       if (onError) {
         onError(err);
       }
     }
-  };
+  }
 
   render() {
     const {
@@ -97,6 +93,17 @@ export default class ReadabilityWebView extends PureComponent {
   }
 }
 
+ReadabilityView.defaultProps = {
+  url: "",
+  title: "",
+  onError: null,
+  renderLoader: null,
+  indicatorProps: {},
+  loadingContainerStyle: {},
+  containerStyle: {},
+  titleStyle: {}
+};
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 36,
@@ -113,3 +120,5 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+export default ReadabilityView;
