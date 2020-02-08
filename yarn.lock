@@ -36,6 +36,20 @@ chalk@^2.4.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+clean-html-js@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/clean-html-js/-/clean-html-js-1.0.2.tgz#321214953d80824ee4fbe52780457a364574432d"
+  integrity sha512-3HUceNdom3jCN0sBE/ImP5Xth6JxI+JTsKn5Ozjvz3PKXFQAcMYrYs6WqwVTseTAj7nq40AJhwVWVtY9tGVDUA==
+  dependencies:
+    buffer "^5.2.1"
+    events "^3.0.0"
+    path "^0.12.7"
+    readability-node "^0.1.0"
+    sanitize-html "^1.20.0"
+    url "^0.11.0"
+    url-parse "^1.4.4"
+    xmldom-silent "^0.1.19"
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"

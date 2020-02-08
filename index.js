@@ -8,7 +8,7 @@ import {
   Text
 } from "react-native";
 import HTMLView from "react-native-htmlview";
-import { cleanHtml } from "./util";
+import { cleanHtml } from "clean-html-js";
 
 export default class ReadabilityWebView extends PureComponent {
   static defaultProps = {
