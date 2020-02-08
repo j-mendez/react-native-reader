@@ -36,10 +36,10 @@ chalk@^2.4.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-clean-html-js@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/clean-html-js/-/clean-html-js-1.0.2.tgz#321214953d80824ee4fbe52780457a364574432d"
-  integrity sha512-3HUceNdom3jCN0sBE/ImP5Xth6JxI+JTsKn5Ozjvz3PKXFQAcMYrYs6WqwVTseTAj7nq40AJhwVWVtY9tGVDUA==
+clean-html-js@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/clean-html-js/-/clean-html-js-1.0.4.tgz#9039a937748981397de0265a719c0c10b07f707c"
+  integrity sha512-GPLE7RncLp7qPEIrlkbkqvzEfvljnqDpd1vdq3tqtooCgXhZkIX5wtVfWxn1KlHvaaMzP0KTOe4nahJ2pScc1g==
   dependencies:
     buffer "^5.2.1"
     events "^3.0.0"
