@@ -10,6 +10,8 @@ How to use:
 
 - Just pass in a Url into the component and your good to go.
 
+If you need to use this in a web browser theres a react version [Example](https://github.com/A11yWatch/react-reader)
+
 ## Installation Instructions
 
 ```bash
