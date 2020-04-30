@@ -1,20 +1,20 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import {
   ActivityIndicator,
   ScrollView,
   StyleSheet,
   View,
-  Text
-} from "react-native";
-import HTMLView from "react-native-htmlview";
-import { cleanHtml } from "clean-html-js";
+  Text,
+} from 'react-native';
+import HTMLView from 'react-native-htmlview';
+import { cleanHtml } from 'clean-html-js';
 
 class ReadabilityView extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      cleanHtmlSource: undefined
+      cleanHtmlSource: undefined,
     };
 
     this.parseHtml = this.parseHtml.bind(this);
@@ -24,18 +24,18 @@ class ReadabilityView extends PureComponent {
     this.parseHtml();
   }
 
-  componentDidUpdate=(prevProps,prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     if (
       this.props.url !== prevProps.url ||
       this.props.title !== prevProps.title
     ) {
       this.parseHtml();
     }
-    
-    if(prevState.cleanHtmlSource !==this.state.cleanHtmlSource){
+
+    if (prevState.cleanHtmlSource !== this.state.cleanHtmlSource) {
       this.props.onParsed(this.state.cleanHtmlSource);
     }
-  }
+  };
 
   async parseHtml() {
     const { url, title, onError } = this.props;
@@ -48,7 +48,7 @@ class ReadabilityView extends PureComponent {
       this.setState({
         cleanHtmlSource: !readabilityArticle
           ? `<h1>Sorry, issue parsing ${url}</h1>`
-          : readabilityArticle.content
+          : readabilityArticle.content,
       });
     } catch (err) {
       if (onError) {
@@ -64,7 +64,7 @@ class ReadabilityView extends PureComponent {
       titleStyle,
       indicatorProps,
       renderLoader,
-      title
+      title,
     } = this.props;
     const { cleanHtmlSource } = this.state;
 
@@ -78,7 +78,7 @@ class ReadabilityView extends PureComponent {
               style={[
                 styles.flex,
                 styles.loadingContainer,
-                loadingContainerStyle
+                loadingContainerStyle,
               ]}
             >
               <ActivityIndicator {...indicatorProps} />
@@ -98,31 +98,31 @@ class ReadabilityView extends PureComponent {
 }
 
 ReadabilityView.defaultProps = {
-  url: "",
-  title: "",
+  url: '',
+  title: '',
   onError: null,
   renderLoader: null,
   indicatorProps: {},
   loadingContainerStyle: {},
   containerStyle: {},
-  titleStyle: {}
+  titleStyle: {},
 };
 
 const styles = StyleSheet.create({
   title: {
     fontSize: 36,
-    fontWeight: "600"
+    fontWeight: '600',
   },
   container: {
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   loadingContainer: {
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default ReadabilityView;
