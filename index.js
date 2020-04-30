@@ -47,7 +47,7 @@ class ReadabilityView extends PureComponent {
 
       this.setState({
         cleanHtmlSource: !readabilityArticle
-          ? `<h1>Sorry, issue parsing ${url}</h1>`
+          ? `<p>Could not getReadable data from the url</p>`
           : readabilityArticle.content,
       });
     } catch (err) {
