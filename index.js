@@ -24,12 +24,16 @@ class ReadabilityView extends PureComponent {
     this.parseHtml();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate=(prevProps,prevState) {
     if (
       this.props.url !== prevProps.url ||
       this.props.title !== prevProps.title
     ) {
       this.parseHtml();
+    }
+    
+    if(prevState.cleanHtmlSource !==this.state.cleanHtmlSource){
+      this.props.onParsed(this.state.cleanHtmlSource);
     }
   }
 
