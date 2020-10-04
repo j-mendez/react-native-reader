@@ -1,5 +1,7 @@
 ## react-native-reader
 
+[![j-mendez](https://circleci.com/gh/j-mendez/react-native-reader.svg?style=svg)](https://circleci.com/gh/j-mendez/react-native-reader)
+
 An iOS/Android lightning fast component that renders any web url into clean native views to display content.
 
 Main Feature:
@@ -27,8 +29,6 @@ import ReaderView from "react-native-reader";
 
 <ReaderView url="https://www.nytimes.com" title="The Earth is Flat" />;
 ```
-
-- For more help getting started checkout [Example](https://github.com/j-mendez/react-native-reader-example)
 
 ## Available Props
 
