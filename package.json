@@ -1,6 +1,6 @@
 {
   "name": "react-native-reader",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "React Native package that turns a Webview into a Safari like Readability View for android and iOS",
   "keywords": [
     "react-native-readability",
@@ -11,18 +11,38 @@
     "ios-reader",
     "android-android"
   ],
+  "main": "dist/reader.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jeffreymendez1993/react-native-webview-readability.git"
   },
   "dependencies": {
-    "clean-html-js": "^1.0.4",
+    "clean-html-js": "^1.0.7",
     "react-native-htmlview": "^0.15.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "prepare": "tsc"
   },
   "author": "Jeffrey Mendez <jeffmendez19@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jeffreymendez1993/react-native-webview-readability/issues"
   },
-  "homepage": "https://github.com/jeffreymendez1993/react-native-webview-readability#readme"
+  "homepage": "https://github.com/jeffreymendez1993/react-native-webview-readability#readme",
+  "devDependencies": {
+    "@testing-library/jest-native": "^3.4.3",
+    "@testing-library/react-native": "^7.0.2",
+    "@types/react": "^16.9.50",
+    "@types/react-native": "^0.63.23",
+    "dotenv": "^8.2.0",
+    "jest": "^26.4.2",
+    "jest-fetch-mock": "^3.0.3",
+    "react": "^16.13.1",
+    "react-native": "^0.63.3",
+    "react-test-renderer": "^16.13.1",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3",
+    "xhr-mock": "^2.5.1"
+  }
 }

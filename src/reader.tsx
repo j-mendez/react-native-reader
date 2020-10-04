@@ -2,26 +2,48 @@ import React, { PureComponent } from "react";
 import {
   ActivityIndicator,
   ScrollView,
+  StyleProp,
   StyleSheet,
   View,
-  Text
+  Text,
+  TextStyle,
+  ViewStyle,
+  ViewProps,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
 import { cleanHtml } from "clean-html-js";
 
-class ReadabilityView extends PureComponent {
+interface Props {
+  errorPage?: string;
+  url: string;
+  title?: string;
+  onError?(e?: Error);
+  renderLoader?: any;
+  indicatorProps?: ViewProps;
+  loadingContainerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+}
+
+interface State {
+  cleanHtmlSource?: string;
+}
+
+class ReadabilityView extends PureComponent<Props, State> {
+  private mounted = false;
+
   constructor(props) {
     super(props);
-
-    this.state = {
-      cleanHtmlSource: undefined
-    };
-
     this.parseHtml = this.parseHtml.bind(this);
   }
 
   componentDidMount() {
+    this.mounted = true;
     this.parseHtml();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   componentDidUpdate(prevProps) {
@@ -34,21 +56,23 @@ class ReadabilityView extends PureComponent {
   }
 
   async parseHtml() {
-    const { url, title, onError } = this.props;
+    const { url, title, onError, errorPage } = this.props;
 
     try {
       const response = await fetch(url);
       const html = await response.text();
       const readabilityArticle = await cleanHtml(html, url);
 
-      this.setState({
-        cleanHtmlSource: !readabilityArticle
-          ? `<h1>Sorry, issue parsing ${url}</h1>`
-          : readabilityArticle.content
-      });
-    } catch (err) {
+      this.mounted &&
+        this.setState({
+          cleanHtmlSource: !readabilityArticle
+            ? errorPage || `<h1>Sorry, issue parsing ${url}</h1>`
+            : readabilityArticle.content,
+        });
+    } catch (e) {
+      console.error(e);
       if (onError) {
-        onError(err);
+        this.mounted && onError(e);
       }
     }
   }
@@ -60,30 +84,36 @@ class ReadabilityView extends PureComponent {
       titleStyle,
       indicatorProps,
       renderLoader,
-      title
+      title,
     } = this.props;
-    const { cleanHtmlSource } = this.state;
+    const cleanHtmlSource = this.state && this.state.cleanHtmlSource;
 
     return (
       <View style={[styles.flex, containerStyle]}>
-        {cleanHtmlSource === undefined ? (
+        {!cleanHtmlSource ? (
           renderLoader ? (
             renderLoader
           ) : (
             <View
+              testID="reader-loader"
               style={[
                 styles.flex,
                 styles.loadingContainer,
-                loadingContainerStyle
+                loadingContainerStyle,
               ]}
             >
               <ActivityIndicator {...indicatorProps} />
             </View>
           )
         ) : (
-          <ScrollView style={[styles.flex, styles.container]}>
+          <ScrollView
+            style={[styles.flex, styles.container]}
+            testID="reader-body"
+          >
             {title ? (
-              <Text style={[styles.title, titleStyle]}>{title}</Text>
+              <Text testID="reader-title" style={[styles.title, titleStyle]}>
+                {title}
+              </Text>
             ) : null}
             <HTMLView value={cleanHtmlSource} {...this.props} />
           </ScrollView>
@@ -93,32 +123,21 @@ class ReadabilityView extends PureComponent {
   }
 }
 
-ReadabilityView.defaultProps = {
-  url: "",
-  title: "",
-  onError: null,
-  renderLoader: null,
-  indicatorProps: {},
-  loadingContainerStyle: {},
-  containerStyle: {},
-  titleStyle: {}
-};
-
 const styles = StyleSheet.create({
   title: {
     fontSize: 36,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   container: {
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   loadingContainer: {
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 export default ReadabilityView;
