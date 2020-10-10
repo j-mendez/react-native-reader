@@ -11,9 +11,11 @@ import {
   ViewProps,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
-import { cleanHtml } from "clean-html-js";
+import cleanHtml from "clean-html-js";
+import type { Config as CleanHtmlConfig } from "clean-html-js";
 
 interface Props {
+  config?: CleanHtmlConfig;
   errorPage?: string;
   url: string;
   title?: string;
@@ -56,12 +58,12 @@ class ReadabilityView extends PureComponent<Props, State> {
   }
 
   async parseHtml() {
-    const { url, title, onError, errorPage } = this.props;
+    const { config, url, title, onError, errorPage } = this.props;
 
     try {
       const response = await fetch(url);
       const html = await response.text();
-      const readabilityArticle = await cleanHtml(html, url);
+      const readabilityArticle = await cleanHtml(html, url, config);
 
       this.mounted &&
         this.setState({

@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  render,
-  waitFor,
-  waitForElementToBeRemoved,
-} from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
 import fetchMock from "jest-fetch-mock";
 import mock from "xhr-mock";
 import Reader from "../src/reader";
