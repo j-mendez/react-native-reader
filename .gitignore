@@ -1,7 +1,7 @@
 node_modules
 .DS_Store
 .jest
-types
+/types
 dist
 __snapshots__
 .env

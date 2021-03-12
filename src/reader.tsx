@@ -2,34 +2,14 @@ import React, { PureComponent } from "react";
 import {
   ActivityIndicator,
   ScrollView,
-  StyleProp,
   StyleSheet,
   View,
   Text,
-  TextStyle,
-  ViewStyle,
-  ViewProps,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
 import cleanHtml from "clean-html-js";
 import type { Config as CleanHtmlConfig } from "clean-html-js";
-
-interface Props {
-  config?: CleanHtmlConfig;
-  errorPage?: string;
-  url: string;
-  title?: string;
-  onError?(e?: Error);
-  renderLoader?: any;
-  indicatorProps?: ViewProps;
-  loadingContainerStyle?: StyleProp<ViewStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
-  titleStyle?: StyleProp<TextStyle>;
-}
-
-interface State {
-  cleanHtmlSource?: string;
-}
+import type { State, Props } from './types'
 
 class ReadabilityView extends PureComponent<Props, State> {
   private mounted = false;
@@ -50,33 +30,47 @@ class ReadabilityView extends PureComponent<Props, State> {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.url !== prevProps.url ||
-      this.props.title !== prevProps.title
+      this.props.url !== prevProps.url
     ) {
       this.parseHtml();
     }
   }
 
-  async parseHtml() {
-    const { config, url, title, onError, errorPage } = this.props;
+  async getData() {
+    const { url, onError } = this.props;
 
     try {
       const response = await fetch(url);
-      const html = await response.text();
-      const readabilityArticle = await cleanHtml(html, url, config);
-
-      this.mounted &&
-        this.setState({
-          cleanHtmlSource: !readabilityArticle
-            ? errorPage || `<h1>Sorry, issue parsing ${url}</h1>`
-            : readabilityArticle.content,
-        });
-    } catch (e) {
-      console.error(e);
-      if (onError) {
-        this.mounted && onError(e);
-      }
+      return await response.text();
+    } catch (error) {
+       this.logError(error)
     }
+  }
+
+  async parseHtml() {
+    const { config, url, title } = this.props;
+    const html =  await this.getData()
+
+    try {
+      const readabilityArticle = await cleanHtml(html + "", url, config);
+      this.setView(readabilityArticle);
+    } catch (error) {
+      this.logError(error)
+    }
+  }
+
+  setView(readabilityArticle) {
+    this.mounted &&
+    this.setState({
+      cleanHtmlSource: !readabilityArticle
+        ? this.props.errorPage || `<h1>Sorry, issue parsing ${this.props.url}</h1>`
+        : readabilityArticle.content,
+    });
+  }
+
+  logError(error) {
+    const { onError } = this.props;
+    onError ? onError(error) : console.error(error);
   }
 
   render() {
