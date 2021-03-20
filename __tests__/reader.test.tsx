@@ -24,4 +24,13 @@ describe("reader view rendering", () => {
 
     expect(toJSON()).toMatchSnapshot();
   });
+
+  test("reader can render error", async () => {
+    const url = "https://www.w.com";
+    const { getByTestId, queryByTestId, toJSON } = render(<Reader url={url} />);
+
+    await waitFor(() => expect(queryByTestId("reader-body")).toBeTruthy());
+
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

@@ -71,6 +71,7 @@ class ReadabilityView extends PureComponent<Props, State> {
   logError(error) {
     const { onError } = this.props;
     onError ? onError(error) : console.error(error);
+    this.setView(null);
   }
 
   render() {

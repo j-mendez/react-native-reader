@@ -1,6 +1,6 @@
 {
   "name": "react-native-reader",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "React Native package that turns a Webview into a Safari like Readability View for android and iOS",
   "keywords": [
     "react-native-readability",
@@ -17,8 +17,8 @@
     "url": "https://github.com/jeffreymendez1993/react-native-webview-readability.git"
   },
   "dependencies": {
-    "clean-html-js": "^1.1.4",
-    "react-native-htmlview": "^0.15.0"
+    "clean-html-js": "^1.2.0",
+    "react-native-htmlview": "^0.16.0"
   },
   "scripts": {
     "test": "jest -u",

@@ -2,3 +2,5 @@ __tests__
 sample.env
 .circleci
 .github
+jest.config.js
+tsconfig.json
