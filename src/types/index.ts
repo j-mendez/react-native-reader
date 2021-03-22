@@ -1,2 +1,2 @@
-export type { Props } from "./props";
-export type { State } from "./state";
+export type { BodyProps, LoaderProps, Props } from "./props"
+export type { State } from "./state"
