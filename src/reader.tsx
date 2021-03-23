@@ -10,14 +10,14 @@ import type { State, Props } from "./types"
 class ReadabilityView extends PureComponent<Props, State> {
   private mounted = false
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.parseHtml = this.parseHtml.bind(this)
   }
 
   componentDidMount() {
     this.mounted = true
-    this.parseHtml()
+    !this.props.lazy && this.parseHtml()
   }
 
   componentWillUnmount() {
@@ -25,7 +25,10 @@ class ReadabilityView extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.url !== prevProps.url) {
+    if (
+      this.props.url !== prevProps.url ||
+      this.props.lazy !== prevProps.lazy
+    ) {
       this.parseHtml()
     }
   }
@@ -46,7 +49,8 @@ class ReadabilityView extends PureComponent<Props, State> {
     const html = await this.getData()
 
     try {
-      const readabilityArticle = await cleanHtml(html + "", url, config)
+      const readabilityArticle =
+        html && (await cleanHtml(html + "", url, config))
       this.setView(readabilityArticle)
     } catch (error) {
       this.logError(error)

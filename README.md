@@ -31,28 +31,12 @@ import ReaderView from "react-native-reader";
 <ReaderView url="https://www.nytimes.com" title="The Earth is Flat" />
 ```
 
-refetching can be done using refs and calling `parseHtml`
-
-```typescript
-import React from "react"
-import ReaderView from "react-native-reader";
-
-function App(){
-  	const ref = React.useRef();
-
-	React.useEffect(() => {
-		ref.current.parseHtml();
-	}, [ref]);
-
-	return <ReaderView url="https://www.nytimes.com" ref={ref} />
-}
-```
-
 ## Available Props
 
 | prop                 | default   | type                                                                                   | description                                                                                                     |
 | -------------------- | --------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | url                  | ""        | string                                                                                 | Required: A valid web url source                                                                                |
+| lazy                 | false 	   | boolean 																				| Optional: Lazily set view for reading. - if set to true make sure to call `parseHtml` via refs                  |
 | renderLoader         | null      | Component                                                                              | Optional: A custom component to render while your content is being loaded                                       |
 | title                | ""        | string                                                                                 | Optional: A title to enforce for the content. Helps when a website has multiple h1 tags or (dirty html)         |
 | titleStyle           | undefined | object                                                                                 | Optional: Controls the styling of the title component of the reader.                                            |

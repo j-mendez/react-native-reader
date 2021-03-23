@@ -16,6 +16,7 @@ export interface BodyProps {
 }
 
 export interface Props {
+  lazy?: boolean
   config?: CleanHtmlConfig
   errorPage?: string
   url: string
