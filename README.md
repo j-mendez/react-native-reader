@@ -1,5 +1,6 @@
 ## react-native-reader
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/245324ad194c6a167eb8/maintainability)](https://codeclimate.com/github/j-mendez/react-native-reader/maintainability)
 [![j-mendez](https://circleci.com/gh/j-mendez/react-native-reader.svg?style=svg)](https://circleci.com/gh/j-mendez/react-native-reader)
 
 An iOS/Android lightning fast component that renders any web url into clean native views to display content.
@@ -27,7 +28,24 @@ $ npm install react-native-reader
 ```typescript
 import ReaderView from "react-native-reader";
 
-<ReaderView url="https://www.nytimes.com" title="The Earth is Flat" />;
+<ReaderView url="https://www.nytimes.com" title="The Earth is Flat" />
+```
+
+refetching can be done using refs and calling `parseHtml`
+
+```typescript
+import React from "react"
+import ReaderView from "react-native-reader";
+
+function App(){
+  	const ref = React.useRef();
+
+	React.useEffect(() => {
+		ref.current.parseHtml();
+	}, [ref]);
+
+	return <ReaderView url="https://www.nytimes.com" ref={ref} />
+}
 ```
 
 ## Available Props

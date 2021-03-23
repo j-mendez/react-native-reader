@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
+    "target": "es2019",
+    "moduleResolution": "node",
     "noImplicitAny": false,
-    "lib": ["es2015"],
+    "lib": ["es6"],
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "outDir": "dist/",
     "declaration": true,
-    "declarationDir": "./types",
     "strict": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react-native"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "!src/types/*"],
+  "exclude": ["node_modules", "src/types/*"]
 }
