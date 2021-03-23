@@ -1,6 +1,8 @@
 __tests__
 sample.env
+.env
 .circleci
 .github
 jest.config.js
 tsconfig.json
+src
