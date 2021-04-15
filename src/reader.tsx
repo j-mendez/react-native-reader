@@ -46,14 +46,21 @@ class ReadabilityView extends PureComponent<Props, State> {
 
   async parseHtml() {
     const { config, url, title } = this.props
-    const html = await this.getData()
+    let html
 
     try {
-      const readabilityArticle =
-        html && (await cleanHtml(html + "", url, config))
-      this.setView(readabilityArticle)
+      html = await this.getData()
     } catch (error) {
       this.logError(error)
+    }
+
+    if (html) {
+      try {
+        const readabilityArticle = await cleanHtml(html + "", url, config)
+        this.setView(readabilityArticle)
+      } catch (error) {
+        this.logError(error)
+      }
     }
   }
 
