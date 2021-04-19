@@ -8,7 +8,11 @@ export class Body extends PureComponent<Props> {
     const { title, styles } = this.props
 
     return (
-      <ScrollView style={[styles.flex, styles.container]} testID="reader-body">
+      <ScrollView
+        style={[styles.flex, styles.container]}
+        contentContainerStyle={this.props.contentContainerStyle}
+        testID="reader-body"
+      >
         {title ? (
           <Text
             testID="reader-title"

@@ -13,6 +13,7 @@ export interface BodyProps {
   titleStyle?: StyleProp<TextStyle>
   title?: string
   styles: StyleProp<any>
+  contentContainerStyle?: StyleProp<ViewStyle>
 }
 
 export interface Props {
@@ -24,7 +25,8 @@ export interface Props {
   onError?(e?: Error)
   renderLoader?: any
   indicatorProps?: ViewProps
-  loadingContainerStyle?: StyleProp<ViewStyle>
   containerStyle?: StyleProp<ViewStyle>
+  loadingContainerStyle?: StyleProp<ViewStyle>
+  contentContainerStyle?: StyleProp<ViewStyle>
   titleStyle?: StyleProp<TextStyle>
 }
