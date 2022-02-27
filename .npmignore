@@ -7,5 +7,4 @@ sample.env
 jest.config.js
 tsconfig.json
 src
-example
-tsconfig.jest.json
+examples
