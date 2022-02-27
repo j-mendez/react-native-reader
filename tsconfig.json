@@ -8,13 +8,12 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "outDir": "dist/",
+    "outDir": "build",
     "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react-native"
   },
-  "include": ["src/**/*", "!src/types/*"],
-  "exclude": ["node_modules", "src/types/*",
-    "example"]
+  "include": ["src"],
+  "exclude": ["example"]
 }

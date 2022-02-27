@@ -2,6 +2,6 @@ node_modules
 .DS_Store
 .jest
 /types
-dist
+build
 __snapshots__
 .env

@@ -1,10 +1,11 @@
 __tests__
-sample.env
 .env
 .circleci
 .github
+.jest
+sample.env
 jest.config.js
 tsconfig.json
 src
-.jest
 example
+tsconfig.jest.json
