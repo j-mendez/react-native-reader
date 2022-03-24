@@ -28,6 +28,7 @@ class ReadabilityView extends PureComponent<Props, State> {
   componentDidUpdate(prevProps) {
     if (
       this.props.url !== prevProps.url ||
+      this.props.html !== prevProps.html ||
       this.props.lazy !== prevProps.lazy
     ) {
       this.parseHtml();
@@ -35,7 +36,7 @@ class ReadabilityView extends PureComponent<Props, State> {
   }
 
   async getData() {
-    const { url, onError } = this.props;
+    const { url } = this.props;
 
     try {
       const response = await fetch(url);
@@ -46,18 +47,21 @@ class ReadabilityView extends PureComponent<Props, State> {
   }
 
   async parseHtml() {
-    const { config, url, title } = this.props;
-    let html;
+    const { config, url, html } = this.props;
 
-    try {
-      html = await this.getData();
-    } catch (error) {
-      this.logError(error);
+    let htmlContent = html;
+
+    if (!htmlContent) {
+      try {
+        htmlContent = await this.getData();
+      } catch (error) {
+        this.logError(error);
+      }
     }
 
-    if (html) {
+    if (htmlContent) {
       try {
-        const readabilityArticle = await cleanHtml(html + "", url, config);
+        const readabilityArticle = await cleanHtml(htmlContent, url, config);
         this.setView(readabilityArticle);
       } catch (error) {
         this.logError(error);
