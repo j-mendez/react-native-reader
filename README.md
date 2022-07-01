@@ -23,7 +23,7 @@ $ npm install react-native-reader
 
 ## Example
 
-![Alt Text](https://i.imgur.com/WeROrao.gif)
+![iOS and Android reader being used inside react-native on a bitcoin website](https://i.imgur.com/WeROrao.gif)
 
 ```typescript
 import ReaderView from "react-native-reader";
