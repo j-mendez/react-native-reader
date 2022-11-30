@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { View } from "react-native";
-import HTMLView from "react-native-htmlview";
+import HTMLView from "react-native-fast-htmlview";
 import cleanHtml from "clean-html-js";
 import { Body, Loader } from "./components";
 import { styles } from "./styles/main";
